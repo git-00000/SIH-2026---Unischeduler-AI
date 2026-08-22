@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Timetable AI{% endblock %} · NEP 2020 Scheduler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">TT</div>
+      <div class="brand-text">
+        <span class="brand-title">Unischeduler AI</span>
+        <span class="brand-sub">NEP 2020 Scheduler</span>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <div class="nav-group-label">Overview</div>
+      <a href="{{ url_for('dashboard.dashboard_page') }}" class="nav-link {{ 'active' if request.path=='/' or request.path=='/dashboard' else '' }}">Dashboard</a>
+
+      <div class="nav-group-label">Academic Data</div>
+      <a href="{{ url_for('courses.courses_page') }}" class="nav-link {{ 'active' if request.path=='/courses' else '' }}">Courses</a>
+      <a href="{{ url_for('teachers.teachers_page') }}" class="nav-link {{ 'active' if request.path=='/teachers' else '' }}">Teachers</a>
+      <a href="{{ url_for('students.students_page') }}" class="nav-link {{ 'active' if request.path=='/students' else '' }}">Students &amp; Groups</a>
+      <a href="{{ url_for('rooms.rooms_page') }}" class="nav-link {{ 'active' if request.path=='/rooms' else '' }}">Rooms</a>
+      <a href="{{ url_for('teachers.availability_page') }}" class="nav-link {{ 'active' if request.path=='/availability' else '' }}">Availability</a>
+      <a href="{{ url_for('courses.course_selection_page') }}" class="nav-link {{ 'active' if request.path=='/course-selection' else '' }}">Course Selection<span class="badge-nep">NEP</span></a>
+
+      <div class="nav-group-label">AI Engine</div>
+      <a href="{{ url_for('timetable.generate_page') }}" class="nav-link {{ 'active' if request.path=='/generate' else '' }}">Generate Timetable</a>
+      <a href="{{ url_for('timetable.timetable_page') }}" class="nav-link {{ 'active' if request.path=='/timetable' else '' }}">Timetable Grid</a>
+      <a href="{{ url_for('timetable.conflicts_page') }}" class="nav-link {{ 'active' if request.path=='/conflicts' else '' }}">Conflicts</a>
+      <a href="{{ url_for('timetable.insights_page') }}" class="nav-link {{ 'active' if request.path=='/insights' else '' }}">AI Optimization Insights</a>
+      <a href="{{ url_for('timetable.analytics_page') }}" class="nav-link {{ 'active' if request.path=='/analytics' else '' }}">Analytics</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar">{{ session.get('username','?')[0]|upper }}</div>
+        <div class="user-meta">
+          <span class="user-name">{{ session.get('username','') }}</span>
+          <span class="user-role">{{ session.get('role','') }}</span>
+        </div>
+      </div>
+      <a href="{{ url_for('auth.logout') }}" class="logout-link">Sign out</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div id="flash-region">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% block content %}{% endblock %}
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

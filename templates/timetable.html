@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Timetable{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Timetable Grid</h1>
+    <p class="page-subtitle">The active AI-optimized timetable. View by student group or by teacher.</p>
+  </div>
+  <button class="btn btn-outline-navy border" onclick="window.print()">Print / Export</button>
+</div>
+
+<div class="card card-pad mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-3">
+      <label class="form-label">View by</label>
+      <select id="view-mode" class="form-select">
+        <option value="group">Student Group</option>
+        <option value="teacher">Teacher</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" id="entity-label">Student Group</label>
+      <select id="entity-select" class="form-select"></select>
+    </div>
+    <div class="col-md-5 d-flex gap-3 align-items-center flex-wrap" style="font-size:.78rem;">
+      <span><span class="pill pill-core">Core</span></span>
+      <span><span class="pill pill-elective">Elective</span></span>
+      <span><span class="pill pill-multidisciplinary">Multidisciplinary</span></span>
+      <span><span class="pill pill-skill">Skill/Value/Ability</span></span>
+      <span>🔴 outline = Lab</span>
+    </div>
+  </div>
+</div>
+
+<div class="card card-pad" id="grid-wrap">
+  <div class="empty-state"><h4>No timetable to show yet</h4><p>Select a group/teacher, or generate a timetable first.</p></div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/timetable.js') }}"></script>{% endblock %}

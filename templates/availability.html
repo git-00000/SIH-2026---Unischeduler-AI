@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Teacher Availability{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Teacher Availability</h1>
+    <p class="page-subtitle">Toggle periods a teacher cannot be scheduled in. The optimizer treats this as a hard constraint.</p>
+  </div>
+</div>
+
+<div class="card card-pad mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label">Teacher</label>
+      <select id="av-teacher" class="form-select"></select>
+    </div>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <div class="table-responsive">
+    <table class="table" id="availability-table">
+      <thead><tr id="av-head"></tr></thead>
+      <tbody id="av-body"></tbody>
+    </table>
+  </div>
+  <p class="text-muted" style="font-size:.8rem;">Click a cell to toggle Available / Unavailable. Changes save immediately.</p>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/availability.js') }}"></script>{% endblock %}

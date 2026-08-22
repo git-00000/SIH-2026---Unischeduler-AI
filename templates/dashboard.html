@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-subtitle">Live snapshot of the institution's scheduling data and the current AI-generated timetable.</p>
+  </div>
+  <a href="{{ url_for('timetable.generate_page') }}" class="btn btn-amber">Generate Timetable</a>
+</div>
+
+<div class="row g-3 mb-3" id="stat-cards"></div>
+
+<div class="row g-3 mb-3">
+  <div class="col-lg-6">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Room Utilization</h3>
+      <canvas id="chart-room" height="180"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Teacher Workload</h3>
+      <canvas id="chart-teacher" height="180"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-4">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Course Distribution by Type</h3>
+      <canvas id="chart-coursetype" height="200"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Department-wise Courses</h3>
+      <canvas id="chart-dept" height="200"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Daily Class Distribution</h3>
+      <canvas id="chart-daily" height="200"></canvas>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

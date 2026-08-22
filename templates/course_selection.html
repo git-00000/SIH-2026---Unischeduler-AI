@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Course Selection{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Course Selection <span class="badge-nep">NEP 2020</span></h1>
+    <p class="page-subtitle">Assign courses to a student group -- including electives and courses from other departments. This is the data that lets a CSE group take "Economics" or a Mechanical group take "Data Analytics".</p>
+  </div>
+</div>
+
+<div class="card card-pad mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label">Student Group</label>
+      <select id="cs-group" class="form-select"></select>
+    </div>
+    <div class="col-md-5">
+      <label class="form-label">Add a Course (any department)</label>
+      <select id="cs-course" class="form-select"></select>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-navy w-100" onclick="addSelection()">+ Add to Group</button>
+    </div>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle" id="selection-table">
+      <thead><tr><th>Course</th><th>Type</th><th>Cross-Department?</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/course_selection.js') }}"></script>{% endblock %}

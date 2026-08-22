@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Analytics{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Analytics</h1>
+    <p class="page-subtitle">Deeper view of how the active timetable uses rooms, teachers and course types.</p>
+  </div>
+</div>
+
+<div class="row g-3 mb-3" id="stat-cards"></div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card card-pad"><h3 style="font-size:1rem;">Room Utilization</h3><canvas id="chart-room" height="200"></canvas></div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card card-pad"><h3 style="font-size:1rem;">Teacher Workload</h3><canvas id="chart-teacher" height="200"></canvas></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-pad"><h3 style="font-size:1rem;">Course Type Distribution</h3><canvas id="chart-coursetype" height="220"></canvas></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-pad"><h3 style="font-size:1rem;">Department-wise Courses</h3><canvas id="chart-dept" height="220"></canvas></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-pad"><h3 style="font-size:1rem;">Daily Class Distribution</h3><canvas id="chart-daily" height="220"></canvas></div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/charts.js') }}"></script>{% endblock %}

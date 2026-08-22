@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Teachers{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Teachers</h1>
+    <p class="page-subtitle">Faculty directory and course qualifications used by the optimizer.</p>
+  </div>
+  <button class="btn btn-amber" data-bs-toggle="modal" data-bs-target="#teacherModal">+ Add Teacher</button>
+</div>
+
+<div class="card card-pad mb-3">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle" id="teacher-table">
+      <thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Max Hrs/Week</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <h3 style="font-size:1rem;">Assign Teacher to Course (Qualification)</h3>
+  <p class="page-subtitle">This is what the optimizer uses to decide who is allowed to teach a course.</p>
+  <div class="row g-2 mb-3">
+    <div class="col-md-4"><select id="off-course" class="form-select"></select></div>
+    <div class="col-md-4"><select id="off-teacher" class="form-select"></select></div>
+    <div class="col-md-2"><button class="btn btn-navy w-100" onclick="addOffering()">Assign</button></div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm" id="offering-table">
+      <thead><tr><th>Course</th><th>Teacher</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="teacherModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Add Teacher</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <form id="teacher-form">
+          <div class="mb-2"><label class="form-label">Name</label><input class="form-control" id="t-name" required></div>
+          <div class="mb-2"><label class="form-label">Email</label><input type="email" class="form-control" id="t-email" required></div>
+          <div class="mb-2"><label class="form-label">Department</label><select class="form-select" id="t-dept" required></select></div>
+          <div class="mb-2"><label class="form-label">Max Hours/Week</label><input type="number" class="form-control" id="t-max" value="18"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-navy" id="save-teacher">Save Teacher</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/teachers.js') }}"></script>{% endblock %}

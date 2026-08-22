@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Conflicts{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Conflict Report</h1>
+    <p class="page-subtitle">Human-readable explanation of every conflict detected before and after the last optimization run.</p>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">Before Optimization</h3>
+      <div id="conflicts-before"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card card-pad">
+      <h3 style="font-size:1rem;">After Optimization</h3>
+      <div id="conflicts-after"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/conflicts.js') }}"></script>{% endblock %}

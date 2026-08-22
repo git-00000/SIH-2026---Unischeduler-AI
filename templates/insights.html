@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}AI Optimization Insights{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">AI Optimization Insights</h1>
+    <p class="page-subtitle">Full transparency into how Google OR-Tools CP-SAT solved this timetable -- built for SIH judges to inspect.</p>
+  </div>
+</div>
+
+<div id="insights-body">
+  <div class="empty-state"><h4>No timetable generated yet</h4><p>Generate a timetable first to see optimization details.</p></div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/insights.js') }}"></script>{% endblock %}

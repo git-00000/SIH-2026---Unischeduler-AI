@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Generate Timetable{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">AI Timetable Generation</h1>
+    <p class="page-subtitle">Runs Google OR-Tools CP-SAT constraint optimization over every teacher, room, group and course selection.</p>
+  </div>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-lg-6">
+    <div class="card card-pad h-100">
+      <h3 style="font-size:1rem;">1. Generate a fresh timetable</h3>
+      <p class="text-muted" style="font-size:.85rem;">Solves the full CP-SAT model from scratch using current data (courses, teachers, rooms, availability, selections).</p>
+      <button class="btn btn-amber" id="btn-generate">Generate Timetable</button>
+      <div id="generate-result" class="mt-3"></div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card card-pad h-100">
+      <h3 style="font-size:1rem;">2. What-If Re-optimization</h3>
+      <p class="text-muted" style="font-size:.85rem;">Simulate a disruption (e.g. a room becomes unavailable) and re-optimize while preserving as much of the existing timetable as possible.</p>
+      <div class="mb-2">
+        <label class="form-label">Mark room unavailable, then re-optimize</label>
+        <select id="reopt-room" class="form-select"></select>
+      </div>
+      <button class="btn btn-navy" id="btn-reoptimize">Re-Optimize Timetable</button>
+      <div id="reoptimize-result" class="mt-3"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <h3 style="font-size:1rem;">Recent Generation Runs</h3>
+  <div class="table-responsive">
+    <table class="table table-sm" id="runs-table">
+      <thead><tr><th>Time</th><th>Status</th><th>Objective</th><th>Hard</th><th>Soft</th><th>Duration (s)</th><th>Active</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}<script src="{{ url_for('static', filename='js/generate.js') }}"></script>{% endblock %}

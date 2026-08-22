@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Courses{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Courses</h1>
+    <p class="page-subtitle">Core, elective, and multidisciplinary courses across every department.</p>
+  </div>
+  <button class="btn btn-amber" data-bs-toggle="modal" data-bs-target="#courseModal">+ Add Course</button>
+</div>
+
+<div class="card card-pad">
+  <div class="d-flex gap-2 mb-3">
+    <select id="filter-dept" class="form-select form-select-sm" style="max-width:220px;">
+      <option value="">All departments</option>
+    </select>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle" id="course-table">
+      <thead><tr>
+        <th>Code</th><th>Name</th><th>Department</th><th>Type</th>
+        <th>Credits</th><th>Hrs/Week</th><th>Lab?</th><th>Semester</th><th>Capacity</th><th></th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="courseModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Add Course</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <form id="course-form">
+          <div class="mb-2"><label class="form-label">Course Code</label><input class="form-control" id="f-code" required></div>
+          <div class="mb-2"><label class="form-label">Name</label><input class="form-control" id="f-name" required></div>
+          <div class="mb-2"><label class="form-label">Department</label><select class="form-select" id="f-dept" required></select></div>
+          <div class="mb-2"><label class="form-label">Course Type</label>
+            <select class="form-select" id="f-type" required>
+              {% for t in course_types %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="row">
+            <div class="col mb-2"><label class="form-label">Credits</label><input type="number" min="1" class="form-control" id="f-credits" value="3"></div>
+            <div class="col mb-2"><label class="form-label">Hrs/Week</label><input type="number" min="1" class="form-control" id="f-hours" value="3" required></div>
+          </div>
+          <div class="row">
+            <div class="col mb-2"><label class="form-label">Semester</label><input type="number" min="1" max="8" class="form-control" id="f-sem" value="1"></div>
+            <div class="col mb-2"><label class="form-label">Capacity</label><input type="number" min="1" class="form-control" id="f-cap" value="60"></div>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="f-lab">
+            <label class="form-check-label" for="f-lab">Requires laboratory room</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-navy" id="save-course">Save Course</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/courses.js') }}"></script>
+{% endblock %}
